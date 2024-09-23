@@ -1,32 +1,27 @@
 "use client";
 import { Icon } from "@iconify/react";
 import { Tab, Tabs, Tooltip } from "@nextui-org/react";
-import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 
-export interface MenuProps {
-  key: string;
+export type MenuProps = {
+  sectionKey: string;
   tooltipText?: string;
-}
+};
 
-export interface DotNavigationProps {
+export type DotNavigationProps = {
   menus: MenuProps[];
   tooltipPlacement: "left" | "right" | "top" | "bottom";
   onTabChange?: (tab: string) => void;
-}
+};
 
-interface SwitchTabHandle {
+type SwitchTabHandle = {
   currentTab: string;
   setCurrentTab: (tab: string) => void;
-}
+};
 
 export function DotNavigation(props: DotNavigationProps & SwitchTabHandle) {
-  const { menus, tooltipPlacement } = props;
+  const { menus, tooltipPlacement, currentTab } = props;
   const isVertical = ["left", "right"].includes(tooltipPlacement);
-  const { currentTab, setCurrentTab } = props;
-
-  useEffect(() => {
-    props.onTabChange?.(currentTab);
-  }, [currentTab]);
 
   if (!menus.length) {
     return <></>;
@@ -41,17 +36,16 @@ export function DotNavigation(props: DotNavigationProps & SwitchTabHandle) {
       isVertical={isVertical}
       selectedKey={currentTab}
       onSelectionChange={(e) => {
-        console.log(e);
-        setCurrentTab(e.toString());
+        props.onTabChange?.(e.toString());
       }}
       classNames={{ tabList: "gap-1" }}
     >
-      {menus.map(({ key, tooltipText }) => (
+      {menus.map(({ sectionKey, tooltipText }) => (
         <Tab
           className="px-1"
-          key={key}
+          key={sectionKey}
           title={
-            <div className={`${currentTab === key ? "text-2xl" : ""}`}>
+            <div className={`${currentTab === sectionKey ? "text-2xl" : ""}`}>
               {tooltipText ? (
                 <Tooltip
                   delay={0}
@@ -64,7 +58,7 @@ export function DotNavigation(props: DotNavigationProps & SwitchTabHandle) {
                 >
                   <Icon
                     icon={`${
-                      currentTab === key
+                      currentTab === sectionKey
                         ? "octicon:dot-fill-16"
                         : "octicon:dot-16"
                     }`}
@@ -73,7 +67,7 @@ export function DotNavigation(props: DotNavigationProps & SwitchTabHandle) {
               ) : (
                 <Icon
                   icon={`${
-                    currentTab === key
+                    currentTab === sectionKey
                       ? "octicon:dot-fill-16"
                       : "octicon:dot-16"
                   }`}
@@ -102,15 +96,15 @@ const generatePlacementClassName = (
   }
 };
 
-export interface DotNavigationHandle {
+export type DotNavigationHandle = {
   setCurrentTab: (tab: string) => void;
-}
+};
 
 export const DotNavigationLayer = forwardRef<
   DotNavigationHandle,
   DotNavigationProps
 >((props, ref) => {
-  const pageKeys = props.menus.map(({ key }) => key);
+  const pageKeys = props.menus.map(({ sectionKey }) => sectionKey);
   const [currentTab, setCurrentTab] = useState(pageKeys[0]);
 
   useImperativeHandle(ref, () => ({
@@ -123,7 +117,6 @@ export const DotNavigationLayer = forwardRef<
 
   return (
     <div
-      // className={`left-0 top-0 fixed box-border h-screen w-full z-10 px-4 flex flex-row ${items} ${justify}`}
       className={`z-10 ${generatePlacementClassName(props.tooltipPlacement)}`}
     >
       <DotNavigation

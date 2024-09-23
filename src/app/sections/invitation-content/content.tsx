@@ -1,29 +1,9 @@
 "use client";
-import { useEffect } from "react";
-import { SectionProps } from "../props";
-import { useInView } from "@/hooks/views";
-import WeddingRingsIcon from "./wedding-rings.svg";
 import Image from "next/image";
 import Timeline from "./timeline";
+import WeddingRingsIcon from "./wedding-rings.svg";
 
-const menuProps = {
-  key: "invitation-content",
-  tooltipText: "Thiệp mời",
-};
-
-export function Content(props: SectionProps) {
-  const { ref, isInView } = useInView<HTMLDivElement>();
-
-  useEffect(() => {
-    props.attachMenu?.(menuProps, ref);
-  }, []);
-
-  useEffect(() => {
-    if (isInView) {
-      props.updateActiveMenu?.(menuProps.key);
-    }
-  }, [isInView]);
-
+export function InvitationContent() {
   const timelineData = [
     {
       title: "Flowbite Application UI v2.0.0",
@@ -78,11 +58,11 @@ export function Content(props: SectionProps) {
   ];
 
   return (
-    <div ref={ref} id={menuProps.key} className="w-full h-screen">
+    <>
       Invitation card
       <div>
         <Timeline items={timelineData} />
       </div>
-    </div>
+    </>
   );
 }

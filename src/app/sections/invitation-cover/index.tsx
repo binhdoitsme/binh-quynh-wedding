@@ -1,9 +1,8 @@
 "use client";
-import { useInView, useScreenSize } from "@/hooks/views";
+import { useScreenSize } from "@/hooks/views";
 import { Button } from "@nextui-org/react";
 import { Imperial_Script, Montserrat } from "next/font/google";
-import { useEffect, useMemo } from "react";
-import { SectionProps } from "../props";
+import { useMemo } from "react";
 
 const scriptFont = Imperial_Script({
   weight: "400",
@@ -15,14 +14,9 @@ const montserrat = Montserrat({
   subsets: ["vietnamese"],
 });
 
-const menuProps = {
-  key: "invitation-cover",
-  tooltipText: "",
-};
-
-export function Cover(props: SectionProps) {
-  const { ref, isInView } = useInView<HTMLDivElement>();
+export function InvitationCover() {
   const screenSize = useScreenSize();
+
   const textSizes = useMemo(() => {
     if (screenSize?.device === "mobile") {
       return { script: "text-7xl", info: "text-sm", head: "text-3xl" };
@@ -30,21 +24,9 @@ export function Cover(props: SectionProps) {
     return { script: "text-8xl", info: "text-md", head: "text-4xl" };
   }, [screenSize]);
 
-  useEffect(() => {
-    props.attachMenu?.(menuProps, ref);
-  }, []);
-
-  useEffect(() => {
-    if (isInView) {
-      props.updateActiveMenu?.(menuProps.key);
-    }
-  }, [isInView]);
-
   return (
     <div
-      ref={ref}
-      id={menuProps.key}
-      className={`${montserrat.className} w-full h-screen bg-red-800 text-content1 flex flex-col justify-center items-center`}
+      className={`${montserrat.className} w-full h-full bg-red-800 text-content1 flex flex-col justify-center items-center`}
     >
       <p className={`${montserrat.className} tracking-wider mb-2 uppercase`}>
         Save the date
