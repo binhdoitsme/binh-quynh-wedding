@@ -3,19 +3,27 @@ import { DotNavigationLayer } from "@/components/dotnav";
 import { Section } from "@/components/dotnav/section";
 import { useDotNavigationHooks } from "@/components/dotnav/hooks";
 import { Gallery } from "../sections/gallery";
-import { InvitationContent } from "../sections/invitation-content/content";
+import { InvitationContent } from "../sections/invitation-content";
 import { InvitationCover } from "../sections/invitation-cover";
 import { RSVP } from "../sections/rsvp";
 import { Story } from "../sections/story";
+import { ThankYou } from "../sections/thank-you";
 
 export default function GalleryPage() {
-  const { attachSection: attachMenu, dotNavigationRef, menus, updateActiveSection: updateActiveMenu, scrollToTab } =
-    useDotNavigationHooks();
+  const {
+    attachSection: attachMenu,
+    dotNavigationRef,
+    menus,
+    updateActiveSection: updateActiveMenu,
+    scrollToTab,
+  } = useDotNavigationHooks();
   const commonProps = { attachMenu, updateActiveMenu };
   return (
     <>
       <Section sectionKey="invitation-cover" tooltipText="" {...commonProps}>
-        <InvitationCover />
+        <InvitationCover
+          handleViewInvitationContent={() => scrollToTab("invitation-content")}
+        />
       </Section>
       <Section
         sectionKey="invitation-content"
@@ -32,6 +40,9 @@ export default function GalleryPage() {
       </Section>
       <Section sectionKey="rsvp" tooltipText="RSVP" {...commonProps}>
         <RSVP />
+      </Section>
+      <Section sectionKey="thank-you" tooltipText="Thank you!">
+        <ThankYou />
       </Section>
       <DotNavigationLayer
         ref={dotNavigationRef}

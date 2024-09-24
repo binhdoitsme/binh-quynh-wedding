@@ -14,7 +14,11 @@ const montserrat = Montserrat({
   subsets: ["vietnamese"],
 });
 
-export function InvitationCover() {
+export type InvitationCoverProps = {
+  handleViewInvitationContent?: () => void;
+};
+
+export function InvitationCover(props: InvitationCoverProps) {
   const screenSize = useScreenSize();
 
   const textSizes = useMemo(() => {
@@ -32,19 +36,20 @@ export function InvitationCover() {
         Save the date
       </p>
       <h1 className={`${textSizes.head} mb-4 tracking-wider`}>02.11.24</h1>
-      <p className={`${scriptFont.className} ${textSizes.script} pr-4`}>
+      <h1 className={`${scriptFont.className} ${textSizes.script} pr-4`}>
         Hải Bình
-      </p>
-      <p className={`${scriptFont.className} ${textSizes.script} pr-4`}>&</p>
-      <p className={`${scriptFont.className} ${textSizes.script} pr-4`}>
+      </h1>
+      <h1 className={`${scriptFont.className} ${textSizes.script} pr-4`}>&</h1>
+      <h1 className={`${scriptFont.className} ${textSizes.script} pr-4`}>
         Bích Quỳnh
-      </p>
+      </h1>
 
       <div className="mt-8">
         <Button
           variant="bordered"
           className="border-white border-1 uppercase text-content1"
           radius="sm"
+          onClick={props.handleViewInvitationContent}
         >
           Xem thiệp mời
         </Button>

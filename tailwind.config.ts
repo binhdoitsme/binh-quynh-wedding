@@ -32,14 +32,14 @@ const config: Config = {
         },
         dark: {
           colors: {
-            primary: '#cc0a00', // Pastel Deep Red
-            secondary: '#A05252', // Dark Blush
-            divider: '#2C2C2C', // Charcoal Gray
+            primary: "#cc0a00", // Pastel Deep Red
+            secondary: "#A05252", // Dark Blush
+            divider: "#2C2C2C", // Charcoal Gray
             // default: '#E0E0E0', // Muted White
-            foreground: '#E0E0E0', // Muted White
-            background: '#B0B0B0', // Black
+            foreground: "#E0E0E0", // Muted White
+            background: "#B0B0B0", // Black
             content1: "#E0E0E0", // White
-          }
+          },
         },
       },
     }),
