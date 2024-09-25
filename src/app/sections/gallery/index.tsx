@@ -1,22 +1,12 @@
 "use client";
 
-import { Divider, ScrollShadow } from "@nextui-org/react";
-import { Imperial_Script } from "next/font/google";
-
-const scriptFont = Imperial_Script({
-  weight: "400",
-  subsets: ["vietnamese"],
-});
+import { UnderlinedHeading } from "@/components/heading/underlined-heading";
+import { ScrollShadow } from "@nextui-org/react";
 
 export function Gallery() {
   return (
     <div className="w-full h-full border border-collapse flex flex-col items-center text-yellow-400 py-4">
-      <h1
-        className={`${scriptFont.className} text-6xl mt-4 pr-4 flex flex-col items-center`}
-      >
-        Gallery
-        <Divider className="my-4 w-2/3 bg-yellow-400" />
-      </h1>
+      <UnderlinedHeading text="Gallery" />
       {/* masonry layout */}
       <ScrollShadow>
         <div className="py-4 px-16 sm:px-16">

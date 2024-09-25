@@ -76,11 +76,8 @@ export function InvitationContent() {
   ];
 
   return (
-    <>
-      Invitation card
-      <ScrollShadow>
-        <Timeline items={timelineData} />
-      </ScrollShadow>
-    </>
+    <ScrollShadow className="w-full h-full border border-collapse flex flex-col items-center py-4">
+      <Timeline items={timelineData} />
+    </ScrollShadow>
   );
 }
