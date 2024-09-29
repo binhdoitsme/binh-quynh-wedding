@@ -1,7 +1,8 @@
 "use client";
+import { useScreenSize } from "@/hooks/views";
 import { Icon } from "@iconify/react";
 import { Tab, Tabs, Tooltip } from "@nextui-org/react";
-import { forwardRef, useImperativeHandle, useState } from "react";
+import { forwardRef, useImperativeHandle, useMemo, useState } from "react";
 
 export type MenuProps = {
   sectionKey: string;
@@ -23,13 +24,34 @@ export function DotNavigation(props: DotNavigationProps & SwitchTabHandle) {
   const { menus, tooltipPlacement, currentTab } = props;
   const isVertical = ["left", "right"].includes(tooltipPlacement);
 
+  const screenSize = useScreenSize();
+  const sizes = useMemo<{
+    tab?: "sm" | "md" | "lg";
+    textNormal: string;
+    textHighlighted: string;
+  }>(
+    () =>
+      screenSize?.device === "mobile"
+        ? {
+            tab: "sm",
+            textNormal: "text-sm",
+            textHighlighted: "text-xl",
+          }
+        : {
+            tab: "md",
+            textNormal: "text-md",
+            textHighlighted: "text-2xl",
+          },
+    [screenSize]
+  );
+
   if (!menus.length) {
     return <></>;
   }
 
   return (
     <Tabs
-      size="md"
+      size={sizes.tab}
       radius="full"
       variant="light"
       aria-label="Options"
@@ -45,7 +67,13 @@ export function DotNavigation(props: DotNavigationProps & SwitchTabHandle) {
           className="px-1"
           key={sectionKey}
           title={
-            <div className={`${currentTab === sectionKey ? "text-2xl" : ""}`}>
+            <div
+              className={`${
+                currentTab === sectionKey
+                  ? sizes.textHighlighted
+                  : sizes.textNormal
+              }`}
+            >
               {tooltipText ? (
                 <Tooltip
                   delay={0}
