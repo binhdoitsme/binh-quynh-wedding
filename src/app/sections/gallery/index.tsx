@@ -1,28 +1,105 @@
 "use client";
 
 import { UnderlinedHeading } from "@/components/heading/underlined-heading";
-import { ScrollShadow } from "@nextui-org/react";
+import { useInView, useScreenSize } from "@/hooks/views";
+import { Card, ScrollShadow } from "@nextui-org/react";
+import { stagger, useAnimate } from "framer-motion";
+import Image from "next/image";
+import { useCallback, useEffect, useMemo } from "react";
+
+const baseUrl = process.env["NEXT_PUBLIC_SUPABASE_PUBLIC_URL"] ?? "";
+const baseFolder = `https://${baseUrl}/storage/v1/object/public/wedding-images/public`;
+
+const imagesDesktop = [
+  "VHU06530.jpg",
+  "VHU06613.jpg",
+  "VHU06705.jpg",
+  "VHU06686.jpg",
+  "VHU06789.jpg",
+
+  "VHU07282.jpg",
+  "VHU06922.jpg",
+  "VHU07151.jpg",
+  "VHU06960.jpg",
+  "VHU07085.jpg",
+].map((src) => `${baseFolder}/${src}`);
+
+const imagesMobile = [
+  "VHU06530.jpg",
+  "VHU06613.jpg",
+  "VHU06705.jpg",
+  "VHU06686.jpg",
+
+  "VHU07282.jpg",
+  "VHU06922.jpg",
+  "VHU07151.jpg",
+  "VHU06960.jpg",
+
+  "VHU06789.jpg",
+  "VHU07085.jpg",
+].map((src) => `${baseFolder}/${src}`);
 
 export function Gallery() {
+  const { isInView, ref } = useInView<HTMLDivElement>(0.25);
+  const [scope, animate] = useAnimate();
+  const screenSize = useScreenSize();
+  const images = useMemo(() => {
+    if (screenSize?.device === "mobile") {
+      return imagesMobile;
+    }
+    return imagesDesktop;
+  }, [screenSize]);
+
+  const showImages = useCallback(async () => {
+    animate(
+      scope.current.children,
+      { scale: 1, opacity: 1 },
+      { duration: 0.5, delay: stagger(0.1), ease: "circInOut" }
+    );
+  }, []);
+
+  const hideImages = useCallback(async () => {
+    animate(
+      scope.current.children,
+      { scale: 0, opacity: 0 },
+      { duration: 0.5, delay: stagger(0.1), ease: "circInOut" }
+    );
+  }, []);
+
+  useEffect(() => {
+    if (isInView) {
+      showImages();
+    } else {
+      hideImages();
+    }
+  }, [isInView]);
+
   return (
-    <div className="w-full h-full border border-collapse flex flex-col items-center text-yellow-400 py-4">
-      <UnderlinedHeading text="Gallery" />
+    <div
+      ref={ref}
+      className="w-full h-full border border-collapse flex flex-col items-center text-yellow-400 pt-4 pb-6 lg:pb-4"
+    >
+      <UnderlinedHeading text="Ảnh cưới" />
       {/* masonry layout */}
       <ScrollShadow>
-        <div className="py-4 px-16 sm:px-16">
-          <div className="columns-2 gap-5 sm:columns-3 sm:gap-4 md:columns-4 lg:columns-5 [&>img:not(:first-child)]:mt-8">
-            <img src="https://images.unsplash.com/photo-1472491235688-bdc81a63246e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxjYXR8ZW58MHwwfHx8MTcyMTgyMjE3OXww&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1478098711619-5ab0b478d6e6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw1fHxjYXR8ZW58MHwwfHx8MTcyMTgyMjE3OXww&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1668491195456-9341d9cf3977?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxjYXQlMjB3aGl0ZXxlbnwwfDF8fHwxNzIxODIyMzU3fDA&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1515002246390-7bf7e8f87b54?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxM3x8Y2F0fGVufDB8MHx8fDE3MjE4MjIxNzl8MA&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1511044568932-338cba0ad803?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwyfHxjYXR8ZW58MHwwfHx8MTcyMTgyMjE3OXww&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1475518112798-86ae358241eb?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMHx8Y2F0fGVufDB8MHx8fDE3MjE4MjIxNzl8MA&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1498100152307-ce63fd6c5424?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMXx8Y2F0fGVufDB8MHx8fDE3MjE4MjIxNzl8MA&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1503777119540-ce54b422baff?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw5fHxjYXQlMjB3aGl0ZXxlbnwwfDF8fHwxNzIxODIyMzU3fDA&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1533743983669-94fa5c4338ec?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxjYXR8ZW58MHwwfHx8MTcyMTgyMjE3OXww&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1502083896352-259ab9e342d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxMnx8Y2F0fGVufDB8MHx8fDE3MjE4MjIxNzl8MA&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1708791793972-cf97ef3c01c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHwxfHxjYXQlMjB3aGl0ZXxlbnwwfDB8fHwxNzIxODIyMjkwfDA&ixlib=rb-4.0.3&q=80&w=1080" />
-            <img src="https://images.unsplash.com/photo-1516470544373-df3edeb89d80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w0NzEyNjZ8MHwxfHNlYXJjaHw4fHxjYXQlMjB3aGl0ZXxlbnwwfDB8fHwxNzIxODIyMjkwfDA&ixlib=rb-4.0.3&q=80&w=1080" />
+        <div className="py-4 px-4 lg:px-16">
+          <div ref={scope} className="grid grid-cols-2 lg:grid-cols-5 gap-4">
+            {images.map((src, index) => (
+              <Card
+                key={index}
+                isFooterBlurred
+                radius="sm"
+                className="border-none"
+              >
+                <Image
+                  alt="wedding photo"
+                  className="object-cover hover:scale-110 transition-transform"
+                  height={200}
+                  src={src}
+                  width={250}
+                />
+              </Card>
+            ))}
           </div>
         </div>
       </ScrollShadow>
