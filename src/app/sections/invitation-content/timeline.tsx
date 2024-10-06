@@ -42,10 +42,12 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
   };
 
   return (
-    <motion.ol className="w-2/3 m-6">
+    <motion.ol
+      className="w-5/6 md:w-2/3 m-6 mb-2 text-medium md:text-base leading-5 md:leading-none"
+    >
       {items.map((item, index) => (
-        <motion.li key={index} className="flex flex-row">
-          <motion.div>
+        <motion.li key={index} className="flex flex-row -ms-6 md:ms-0">
+          <motion.div className="w-20 md:w-auto">
             <motion.svg viewBox="0 0 500 1000" className="w-24">
               <motion.line
                 className="stroke-red-200"
@@ -114,7 +116,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               className="col-span-10 md:col-span-11 md:-mx-6"
               {...textSlideFromLeft}
             >
-              <p className="text-base font-normal leading-none text-gray-500 dark:text-gray-400">
+              <p className="font-normal text-gray-500 dark:text-gray-400">
                 {item.date}
               </p>
             </motion.div>
@@ -126,7 +128,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               className="col-span-10 md:col-span-11 md:-mx-6"
               {...textSlideFromLeft}
             >
-              <p className="text-base font-normal leading-none text-gray-500 dark:text-gray-400">
+              <p className="font-normal text-gray-500 dark:text-gray-400">
                 {item.time}
               </p>
             </motion.div>
@@ -139,7 +141,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               className="col-span-10 md:col-span-11 md:-mx-6"
               {...textSlideFromLeft}
             >
-              <p className="text-base font-normal leading-none text-gray-500 dark:text-gray-400">
+              <p className="font-normal text-gray-500 dark:text-gray-400">
                 {item.location}
               </p>
             </motion.div>

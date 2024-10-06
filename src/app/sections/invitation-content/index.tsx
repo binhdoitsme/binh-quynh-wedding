@@ -49,14 +49,14 @@ export function InvitationContent() {
     },
   ];
 
-  const { isInView, ref } = useInView();
+  const { isInView, ref } = useInView(0.2);
 
   return (
     <ScrollShadow
       ref={ref}
       className="w-full h-full flex flex-col items-center py-4"
     >
-      <UnderlinedHeading text="Sự kiện cưới" />
+      <UnderlinedHeading text="Trân trọng kính mời" />
       <AnimatePresence mode="wait">
         {isInView && <Timeline items={timelineData} />}
       </AnimatePresence>

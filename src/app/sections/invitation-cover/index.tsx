@@ -1,6 +1,7 @@
 "use client";
 import { useScreenSize } from "@/hooks/views";
 import { Button } from "@nextui-org/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { Imperial_Script, Montserrat } from "next/font/google";
 import { useMemo } from "react";
 
@@ -29,31 +30,73 @@ export function InvitationCover(props: InvitationCoverProps) {
   }, [screenSize]);
 
   return (
-    <div
-      className={`${montserrat.className} w-full h-full bg-red-800 text-content1 flex flex-col justify-center items-center`}
-    >
-      <p className={`${montserrat.className} tracking-wider mb-2 uppercase`}>
-        Save the date
-      </p>
-      <h1 className={`${textSizes.head} mb-4 tracking-wider`}>02.11.24</h1>
-      <h1 className={`${scriptFont.className} ${textSizes.script} pr-4`}>
-        Hải Bình
-      </h1>
-      <h1 className={`${scriptFont.className} ${textSizes.script} pr-4`}>&</h1>
-      <h1 className={`${scriptFont.className} ${textSizes.script} pr-4`}>
-        Bích Quỳnh
-      </h1>
-
-      <div className="mt-8">
-        <Button
-          variant="bordered"
-          className="border-white border-1 uppercase text-content1"
-          radius="sm"
-          onClick={props.handleViewInvitationContent}
+    <AnimatePresence mode="wait">
+      <div
+        className={`${montserrat.className} w-full h-full bg-red-800 text-content1 flex flex-col justify-center items-center`}
+      >
+        <motion.p
+          className={`${montserrat.className} tracking-wider mb-2 uppercase`}
+          initial={{ opacity: 0, letterSpacing: "0rem" }}
+          animate={{ opacity: 1, letterSpacing: "0.05rem" }}
+          exit={{ opacity: 0, letterSpacing: "0rem" }}
+          transition={{ duration: 0.75 }}
         >
-          Xem thiệp mời
-        </Button>
+          Save the date
+        </motion.p>
+        <motion.h1
+          className={`${textSizes.head} mb-4 tracking-wider`}
+          initial={{ opacity: 0, letterSpacing: "0rem" }}
+          animate={{ opacity: 1, letterSpacing: "0.1rem" }}
+          exit={{ opacity: 0, letterSpacing: "0rem" }}
+          transition={{ duration: 0.75 }}
+        >
+          02.11.24
+        </motion.h1>
+        <motion.h1
+          className={`${scriptFont.className} ${textSizes.script} pr-4`}
+          initial={{ y: -20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: -20, opacity: 0 }}
+          transition={{ duration: 0.75, delay: 0.5, ease: "easeInOut" }}
+        >
+          Hải Bình
+        </motion.h1>
+        <motion.h1
+          className={`${scriptFont.className} ${textSizes.script} pr-4`}
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          transition={{ duration: 0.75, delay: 0.5, ease: "easeInOut" }}
+        >
+          &
+        </motion.h1>
+        <motion.h1
+          className={`${scriptFont.className} ${textSizes.script} pr-4`}
+          initial={{ y: 20, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 20, opacity: 0 }}
+          transition={{ duration: 0.75, delay: 0.5, ease: "easeInOut" }}
+        >
+          Bích Quỳnh
+        </motion.h1>
+
+        <motion.div
+          className="mt-8"
+          initial={{ scale: 0, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          exit={{ scale: 0, opacity: 0 }}
+          transition={{ duration: 0.75, delay: 1, ease: "circInOut" }}
+        >
+          <Button
+            variant="bordered"
+            className="border-white border-1 uppercase text-content1 hover:scale-105"
+            radius="sm"
+            onClick={props.handleViewInvitationContent}
+          >
+            Xem thiệp mời
+          </Button>
+        </motion.div>
       </div>
-    </div>
+    </AnimatePresence>
   );
 }
