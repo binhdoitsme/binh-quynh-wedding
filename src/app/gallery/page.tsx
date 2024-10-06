@@ -8,6 +8,7 @@ import { InvitationCover } from "../sections/invitation-cover";
 import { RSVP } from "../sections/rsvp";
 import { Story } from "../sections/story";
 import { ThankYou } from "../sections/thank-you";
+import { SendGifts } from "../sections/send-gifts";
 
 export default function GalleryPage() {
   const {
@@ -40,6 +41,9 @@ export default function GalleryPage() {
       </Section>
       <Section sectionKey="rsvp" tooltipText="RSVP" {...commonProps}>
         <RSVP />
+      </Section>
+      <Section sectionKey="send-gifts" className="w-full h-[50vh]">
+        <SendGifts />
       </Section>
       <Section sectionKey="thank-you" tooltipText="Thank you!">
         <ThankYou />
