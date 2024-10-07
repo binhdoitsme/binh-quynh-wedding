@@ -40,7 +40,7 @@ export function Section(
     <div
       id={props.sectionKey}
       ref={ref}
-      className={`w-full h-screen ${props.className ?? ""}`}
+      className={`${props.className ?? "w-full h-screen"}`}
     >
       {props.children}
     </div>
