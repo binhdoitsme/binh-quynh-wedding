@@ -11,10 +11,14 @@
   "dependencies": {
     "@iconify/react": "^5.0.2",
     "@nextui-org/react": "^2.4.8",
+    "@supabase/supabase-js": "^2.45.4",
+    "add": "^2.0.6",
+    "axios": "^1.7.7",
     "framer-motion": "^11.5.4",
     "next": "14.2.11",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@types/node": "^20",

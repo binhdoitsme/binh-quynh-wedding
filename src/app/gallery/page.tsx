@@ -45,7 +45,11 @@ export default function GalleryPage() {
       <Section sectionKey="send-gifts" className="w-full h-[50vh]">
         <SendGifts />
       </Section>
-      <Section sectionKey="thank-you" tooltipText="Thank you!">
+      <Section
+        sectionKey="thank-you"
+        tooltipText="Thank you!"
+        className="w-full h-screen relative"
+      >
         <ThankYou />
       </Section>
       <DotNavigationLayer

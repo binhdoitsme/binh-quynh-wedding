@@ -1,6 +1,6 @@
 "use client";
+import { OutlinedButton } from "@/components/buttons";
 import { useScreenSize } from "@/hooks/views";
-import { Button } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Imperial_Script, Montserrat } from "next/font/google";
 import { useMemo } from "react";
@@ -87,14 +87,9 @@ export function InvitationCover(props: InvitationCoverProps) {
           exit={{ scale: 0, opacity: 0 }}
           transition={{ duration: 0.75, delay: 1, ease: "circInOut" }}
         >
-          <Button
-            variant="bordered"
-            className="border-white border-1 uppercase text-content1 hover:scale-105"
-            radius="sm"
-            onClick={props.handleViewInvitationContent}
-          >
+          <OutlinedButton onClick={props.handleViewInvitationContent} uppercase>
             Xem thiệp mời
-          </Button>
+          </OutlinedButton>
         </motion.div>
       </div>
     </AnimatePresence>

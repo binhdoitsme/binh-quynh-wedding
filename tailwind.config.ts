@@ -22,7 +22,7 @@ const config: Config = {
       themes: {
         light: {
           colors: {
-            primary: "#FF5C5C", // Pastel Red
+            primary: "#B91C1C", // Pastel Red
             secondary: "#FFB3B3", // Pastel Blush
             divider: "#D9D9D9", // Soft Gray
             foreground: "#B0B0B0", // Pastel Black
@@ -32,7 +32,7 @@ const config: Config = {
         },
         dark: {
           colors: {
-            primary: "#cc0a00", // Pastel Deep Red
+            primary: "#B91C1C", // Pastel Deep Red
             secondary: "#A05252", // Dark Blush
             divider: "#2C2C2C", // Charcoal Gray
             // default: '#E0E0E0', // Muted White

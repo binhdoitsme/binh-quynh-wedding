@@ -116,7 +116,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               className="col-span-10 md:col-span-11 md:-mx-6"
               {...textSlideFromLeft}
             >
-              <p className="font-normal text-gray-500 dark:text-gray-400">
+              <p className="font-normal text-gray-600 dark:text-gray-400">
                 {item.date}
               </p>
             </motion.div>
@@ -128,7 +128,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               className="col-span-10 md:col-span-11 md:-mx-6"
               {...textSlideFromLeft}
             >
-              <p className="font-normal text-gray-500 dark:text-gray-400">
+              <p className="font-normal text-gray-600 dark:text-gray-400">
                 {item.time}
               </p>
             </motion.div>
@@ -141,7 +141,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               className="col-span-10 md:col-span-11 md:-mx-6"
               {...textSlideFromLeft}
             >
-              <p className="font-normal text-gray-500 dark:text-gray-400">
+              <p className="font-normal text-gray-600 dark:text-gray-400">
                 {item.location}
               </p>
             </motion.div>
