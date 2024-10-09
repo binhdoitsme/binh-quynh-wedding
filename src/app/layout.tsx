@@ -20,7 +20,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${font.className} antialiased bg-[#f9fcff]`}>
+      <body className={`${font.className} antialiased bg-[#fafafa]`}>
         <Providers>{children}</Providers>
         <footer className="tracking-tighter text-center text-white bg-red-800 p-1 text-sm">
           Made with ❤️ by binhdoitsme@gmail.com
