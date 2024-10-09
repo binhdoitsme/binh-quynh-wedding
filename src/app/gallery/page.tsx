@@ -9,6 +9,7 @@ import { RSVP } from "../sections/rsvp";
 import { Story } from "../sections/story";
 import { ThankYou } from "../sections/thank-you";
 import { SendGifts } from "../sections/send-gifts";
+import { BrideAndGroom } from "../sections/bride-groom";
 
 export default function GalleryPage() {
   const {
@@ -33,6 +34,13 @@ export default function GalleryPage() {
       >
         <InvitationContent />
       </Section>
+      <Section
+        sectionKey="bride-groom"
+        tooltipText="Bride & Groom"
+        {...commonProps}
+      >
+        <BrideAndGroom />
+      </Section>
       <Section sectionKey="story" tooltipText="Our love story" {...commonProps}>
         <Story />
       </Section>
@@ -42,13 +50,19 @@ export default function GalleryPage() {
       <Section sectionKey="rsvp" tooltipText="RSVP" {...commonProps}>
         <RSVP />
       </Section>
-      <Section sectionKey="send-gifts" className="w-full h-[50vh]">
+      <Section
+        sectionKey="send-gifts"
+        tooltipText="Send gifts"
+        className="w-full h-[50vh]"
+        {...commonProps}
+      >
         <SendGifts />
       </Section>
       <Section
         sectionKey="thank-you"
         tooltipText="Thank you!"
         className="w-full h-screen relative"
+        {...commonProps}
       >
         <ThankYou />
       </Section>
