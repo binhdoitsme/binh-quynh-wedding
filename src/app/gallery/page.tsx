@@ -36,23 +36,27 @@ export default function GalleryPage() {
       </Section>
       <Section
         sectionKey="bride-groom"
-        tooltipText="Bride & Groom"
+        tooltipText="Cô dâu & Chú rể"
         {...commonProps}
       >
         <BrideAndGroom />
       </Section>
-      <Section sectionKey="story" tooltipText="Our love story" {...commonProps}>
+      <Section sectionKey="story" tooltipText="Câu chuyện" {...commonProps}>
         <Story />
       </Section>
-      <Section sectionKey="gallery" tooltipText="Gallery" {...commonProps}>
+      <Section sectionKey="gallery" tooltipText="Ảnh cưới" {...commonProps}>
         <Gallery />
       </Section>
-      <Section sectionKey="rsvp" tooltipText="RSVP" {...commonProps}>
+      <Section
+        sectionKey="rsvp"
+        tooltipText="Xác nhận tham dự"
+        {...commonProps}
+      >
         <RSVP />
       </Section>
       <Section
         sectionKey="send-gifts"
-        tooltipText="Send gifts"
+        tooltipText="Gửi quà"
         className="w-full h-[50vh]"
         {...commonProps}
       >
@@ -60,7 +64,7 @@ export default function GalleryPage() {
       </Section>
       <Section
         sectionKey="thank-you"
-        tooltipText="Thank you!"
+        tooltipText="Lời cảm ơn"
         className="w-full h-screen relative"
         {...commonProps}
       >

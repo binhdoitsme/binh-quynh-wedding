@@ -16,6 +16,7 @@ export function ThankYou() {
   const isInView = useInView(scope, { amount: 0.25 });
 
   const enter = useCallback(async () => {
+    await animate("img", { opacity: 0 }, { duration: 0 });
     await Promise.all([
       animate(
         scope.current,
@@ -31,7 +32,7 @@ export function ThankYou() {
     await Promise.all([
       animate(
         "img",
-        { opacity: 0.5 },
+        { opacity: 0.4 },
         { ease: "easeInOut", duration: 1, delay: 0.5 }
       ),
       animate(
@@ -74,10 +75,10 @@ export function ThankYou() {
   return (
     <div
       ref={scope}
-      className="w-full h-full overflow-hidden absolute top-0 left-0 border-y border-collapse flex flex-col justify-center items-center py-4 bg-black"
+      className="w-full h-full overflow-hidden absolute top-0 left-0 border-y border-collapse flex flex-col justify-center items-center py-4 bg-[#fffdf9]"
     >
       <img
-        className="absolute md:-top-[10rem] object-cover object-top h-full md:h-auto md:w-full"
+        className="absolute md:-top-[10rem] object-cover object-top h-full md:h-auto md:w-full opacity-0"
         src={`${baseFolder}/VHU06801.jpg`}
         alt="..."
       />
