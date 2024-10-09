@@ -41,12 +41,35 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
     },
   };
 
+  const containerVariants = {
+    initial: {},
+    animate: {
+      transition: {
+        staggerChildren: 0.75, // Delay between each child animation
+      },
+    },
+  };
+
+  const itemVariants = {
+    initial: { opacity: 0, transform: "translateX(-10px)" },
+    animate: { opacity: 1, transform: "translateX(0)" },
+    exit: { opacity: 0, transform: "translateX(-10px)" },
+  };
+
   return (
     <motion.ol
       className="w-5/6 md:w-2/3 m-6 mb-2 text-medium md:text-base leading-5 md:leading-none"
+      variants={containerVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
     >
       {items.map((item, index) => (
-        <motion.li key={index} className="flex flex-row -ms-6 md:ms-0">
+        <motion.li
+          key={index}
+          className="flex flex-row -ms-6 md:ms-0"
+          variants={itemVariants}
+        >
           <motion.div className="w-20 md:w-auto">
             <motion.svg viewBox="0 0 500 1000" className="w-24">
               <motion.line
@@ -116,9 +139,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               className="col-span-10 md:col-span-11 md:-mx-6"
               {...textSlideFromLeft}
             >
-              <p className="font-normal text-gray-600 dark:text-gray-400">
-                {item.date}
-              </p>
+              <p className="font-normal text-gray-600">{item.date}</p>
             </motion.div>
             {/* Time */}
             <motion.div className="col-span-2 md:col-span-1" {...simpleFade}>
@@ -128,9 +149,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               className="col-span-10 md:col-span-11 md:-mx-6"
               {...textSlideFromLeft}
             >
-              <p className="font-normal text-gray-600 dark:text-gray-400">
-                {item.time}
-              </p>
+              <p className="font-normal text-gray-600">{item.time}</p>
             </motion.div>
 
             {/* Location */}
@@ -141,9 +160,7 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
               className="col-span-10 md:col-span-11 md:-mx-6"
               {...textSlideFromLeft}
             >
-              <p className="font-normal text-gray-600 dark:text-gray-400">
-                {item.location}
-              </p>
+              <p className="font-normal text-gray-600">{item.location}</p>
             </motion.div>
 
             {/* Action Button or Link */}
