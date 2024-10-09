@@ -82,7 +82,7 @@ export function Gallery() {
       <UnderlinedHeading text="Ảnh cưới" />
       {/* masonry layout */}
       <ScrollShadow>
-        <div className="py-4 px-4 lg:px-16">
+        <div className="py-4 px-4 lg:px-16 lg:my-6">
           <div
             ref={scope}
             className="grid grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-y-8 h-auto"
