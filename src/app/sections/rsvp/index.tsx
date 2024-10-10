@@ -14,7 +14,7 @@ import {
   ModalHeader,
   Radio,
   RadioGroup,
-  ScrollShadow,
+  Spinner,
   useDisclosure,
 } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
@@ -42,6 +42,7 @@ const events = [
 export function RSVP() {
   const [willParticipate, setWillParticipate] = useState<boolean | undefined>();
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const formRef = useRef<HTMLFormElement | null>(null);
   const abortController = useMemo(() => new AbortController(), []);
@@ -57,6 +58,7 @@ export function RSVP() {
       setInvalidFields(invalidFields);
     } else {
       try {
+        setLoading(true);
         await submitForm(data, abortController);
         setError(undefined);
         // eslint-disable-next-line
@@ -64,13 +66,14 @@ export function RSVP() {
         setError(`${err.response.data.detail}`);
       }
       onOpen();
+      setLoading(false);
     }
   };
 
   return (
-    <div className="w-full h-full border-y border-collapse flex flex-col items-center py-4">
+    <div className="w-full h-auto border-y border-collapse flex flex-col items-center py-4">
       <UnderlinedHeading text="Tham gia đám cưới" />
-      <ScrollShadow className="h-full w-full flex justify-center">
+      <div className="h-auto w-full flex justify-center">
         <div className="w-2/3 lg:w-2/3">
           <p className="italic text-center text-small">
             Nếu có thể tham gia đám cưới, anh/chị vui lòng điền thông tin để gia
@@ -191,16 +194,18 @@ export function RSVP() {
             </AnimatePresence>
             <ButtonGroup>
               <Button
-                className="text-[#FAFAFA]"
+                className="text-[#FAFAFA] transition-all"
                 color="primary"
                 onClick={submitParticipationForm}
+                isDisabled={loading}
               >
+                {loading && <Spinner color="white" size="sm" />}
                 Gửi
               </Button>
             </ButtonGroup>
           </form>
         </div>
-      </ScrollShadow>
+      </div>
       <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent>
           {(onClose) => (

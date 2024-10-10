@@ -3,6 +3,7 @@
 import { UnderlinedHeading } from "@/components/heading/underlined-heading";
 import { imageFromSupabase } from "@/components/storage";
 import { useInView } from "@/hooks/views";
+import { Divider } from "@nextui-org/react";
 import { stagger, useAnimate } from "framer-motion";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
@@ -51,7 +52,11 @@ export function Story() {
         { x: 0, opacity: 1 },
         { duration: 1, ease: "easeInOut", delay: stagger(0.5) }
       ),
-      animate("line", { pathLength: 1 }, { duration: 3, ease: "easeInOut" }),
+      animate(
+        ".__divider__",
+        { height: "100%" },
+        { duration: 3, ease: "easeInOut" }
+      ),
     ]);
   };
   const exit = async () => {
@@ -66,7 +71,11 @@ export function Story() {
         { x: 20, opacity: 0 },
         { duration: 1, ease: "easeInOut" }
       ),
-      animate("line", { pathLength: 0 }, { duration: 1, ease: "easeInOut" }),
+      animate(
+        ".__divider__",
+        { height: 0 },
+        { duration: 1, ease: "easeInOut" }
+      ),
     ]);
   };
 
@@ -93,9 +102,9 @@ export function Story() {
           alt="photo wall"
         />
         <div className="absolute top-0 left-0 z-10 w-full h-full">
-          <div className="w-full h-full grid grid-rows-5 p-4 -mt-8">
+          <div className="w-full h-full grid grid-rows-5 p-8 md:p-4 -mt-8">
             <div className="row-span-1"></div>
-            <div className="row-span-4 flex flex-row justify-around items-center gap-2">
+            <div className="row-span-4 flex flex-row justify-around items-start gap-2">
               <div className="w-[calc(50%-2px)] h-full grid grid-rows-4 grid-cols-1 gap-2">
                 <div className="flex flex-row justify-end mt-1 __left__">
                   <PolaroidImage imageName="2019_02.jpg" />
@@ -128,30 +137,10 @@ export function Story() {
                   </p>
                 </div>
               </div>
-              <svg
-                role="separator"
-                xmlns="http://www.w3.org/2000/svg"
-                aria-orientation="vertical"
-                className="md:mx-8"
-                style={{
-                  willChange: "auto",
-                  height: "calc(100% + 2rem)",
-                  width: "1px",
-                }}
-                stroke="#fafafa"
-              >
-                <line
-                  x1="0"
-                  y1="0"
-                  x2="0"
-                  y2="100%"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  // className="invert"
-                />
-              </svg>
+              <Divider
+                orientation="vertical"
+                className="invert mx-4 __divider__"
+              />
               <div className="w-[calc(50%-2px)] h-full grid grid-rows-4 grid-cols-1 gap-2">
                 <div className="__right__">
                   <h1
