@@ -14,7 +14,8 @@ import {
   ModalHeader,
   Radio,
   RadioGroup,
-  useDisclosure
+  Spinner,
+  useDisclosure,
 } from "@nextui-org/react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useMemo, useRef, useState } from "react";
@@ -41,6 +42,7 @@ const events = [
 export function RSVP() {
   const [willParticipate, setWillParticipate] = useState<boolean | undefined>();
   const [invalidFields, setInvalidFields] = useState<string[]>([]);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string>();
   const formRef = useRef<HTMLFormElement | null>(null);
   const abortController = useMemo(() => new AbortController(), []);
@@ -56,6 +58,7 @@ export function RSVP() {
       setInvalidFields(invalidFields);
     } else {
       try {
+        setLoading(true);
         await submitForm(data, abortController);
         setError(undefined);
         // eslint-disable-next-line
@@ -63,6 +66,7 @@ export function RSVP() {
         setError(`${err.response.data.detail}`);
       }
       onOpen();
+      setLoading(false);
     }
   };
 
@@ -190,10 +194,12 @@ export function RSVP() {
             </AnimatePresence>
             <ButtonGroup>
               <Button
-                className="text-[#FAFAFA]"
+                className="text-[#FAFAFA] transition-all"
                 color="primary"
                 onClick={submitParticipationForm}
+                isDisabled={loading}
               >
+                {loading && <Spinner color="white" size="sm" />}
                 Gửi
               </Button>
             </ButtonGroup>
