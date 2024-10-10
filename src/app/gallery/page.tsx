@@ -1,15 +1,14 @@
 "use client";
 import { DotNavigationLayer } from "@/components/dotnav";
-import { Section } from "@/components/dotnav/section";
 import { useDotNavigationHooks } from "@/components/dotnav/hooks";
+import { Section } from "@/components/dotnav/section";
+import { BrideAndGroom } from "../sections/bride-groom";
 import { Gallery } from "../sections/gallery";
 import { InvitationContent } from "../sections/invitation-content";
 import { InvitationCover } from "../sections/invitation-cover";
 import { RSVP } from "../sections/rsvp";
-import { Story } from "../sections/story";
-import { ThankYou } from "../sections/thank-you";
 import { SendGifts } from "../sections/send-gifts";
-import { BrideAndGroom } from "../sections/bride-groom";
+import { ThankYou } from "../sections/thank-you";
 
 export default function GalleryPage() {
   const {
@@ -41,9 +40,9 @@ export default function GalleryPage() {
       >
         <BrideAndGroom />
       </Section>
-      <Section sectionKey="story" tooltipText="Câu chuyện" {...commonProps}>
+      {/* <Section sectionKey="story" tooltipText="Câu chuyện" {...commonProps}>
         <Story />
-      </Section>
+      </Section> */}
       <Section sectionKey="gallery" tooltipText="Ảnh cưới" {...commonProps}>
         <Gallery />
       </Section>
