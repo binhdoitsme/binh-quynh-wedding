@@ -1,11 +1,11 @@
 "use client";
+import { UnderlinedHeading } from "@/components/heading/underlined-heading";
+import { useInView } from "@/hooks/views";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { Button, ScrollShadow } from "@nextui-org/react";
-import Timeline, { TimelineItem } from "./timeline";
-import { HeartsIcon, PartyChampagneIcon, WeddingRingsIcon } from "./icons";
-import { useInView } from "@/hooks/views";
 import { AnimatePresence } from "framer-motion";
-import { UnderlinedHeading } from "@/components/heading/underlined-heading";
+import { HeartsIcon, PartyChampagneIcon, WeddingRingsIcon } from "./icons";
+import Timeline, { TimelineItem } from "./timeline";
 
 export function InvitationContent() {
   const renderMapMarkerButton = (item: TimelineItem) => (
@@ -44,7 +44,7 @@ export function InvitationContent() {
       time: "16:30",
       location: "Nhà hàng Đại Lộc - Số 280 Lạch Tray, Ngô Quyền, Hải Phòng",
       locationUrl: "https://maps.app.goo.gl/6tvZLDcj12gJwBbx9",
-      icon: <WeddingRingsIcon className="invert" />,
+      icon: <WeddingRingsIcon />,
       action: renderMapMarkerButton,
     },
   ];

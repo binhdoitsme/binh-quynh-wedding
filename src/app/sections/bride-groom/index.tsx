@@ -1,4 +1,5 @@
 import { UnderlinedHeading } from "@/components/heading/underlined-heading";
+import { imageFromSupabase } from "@/components/storage";
 import { useInView } from "@/hooks/views";
 import { AnimatePresence, motion } from "framer-motion";
 import { Imperial_Script, Montserrat } from "next/font/google";
@@ -14,8 +15,6 @@ const montserrat = Montserrat({
   subsets: ["vietnamese"],
 });
 
-const baseUrl = process.env["NEXT_PUBLIC_SUPABASE_PUBLIC_URL"] ?? "";
-const baseFolder = `https://${baseUrl}/storage/v1/object/public/wedding-images/public`;
 const bridePhotoName = "VHU06638.jpg";
 const groomPhotoName = "VHU06613.jpg";
 
@@ -61,7 +60,7 @@ export function BrideAndGroom() {
               >
                 <Image
                   className="object-cover w-full"
-                  src={`${baseFolder}/${bridePhotoName}`}
+                  src={imageFromSupabase(bridePhotoName)}
                   height={200}
                   width={200}
                   alt="bride's photo"
@@ -83,12 +82,12 @@ export function BrideAndGroom() {
                   strokeWidth="1"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  initial={{ pathLength: 0 }}
-                  animate={{ pathLength: 1 }}
-                  exit={{ pathLength: 0 }} // Exit animation for path
+                  initial={{ pathLength: 0, scale: 0 }}
+                  animate={{ pathLength: 1, scale: 1 }}
+                  exit={{ pathLength: 0, scale: 0 }} // Exit animation for path
                   transition={{
                     duration: 1,
-                    ease: "easeInOut",
+                    ease: "backInOut",
                   }}
                 />
               </svg>
@@ -121,7 +120,7 @@ export function BrideAndGroom() {
               >
                 <Image
                   className="object-cover w-full"
-                  src={`${baseFolder}/${groomPhotoName}`}
+                  src={imageFromSupabase(groomPhotoName)}
                   height={200}
                   width={200}
                   alt="bride's photo"

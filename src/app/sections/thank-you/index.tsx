@@ -1,3 +1,4 @@
+import { imageFromSupabase } from "@/components/storage";
 import { useAnimate, useInView } from "framer-motion";
 import { Imperial_Script } from "next/font/google";
 import { useCallback, useEffect } from "react";
@@ -7,9 +8,6 @@ const scriptFont = Imperial_Script({
   subsets: ["vietnamese"],
   display: "swap",
 });
-
-const baseUrl = process.env["NEXT_PUBLIC_SUPABASE_PUBLIC_URL"] ?? "";
-const baseFolder = `https://${baseUrl}/storage/v1/object/public/wedding-images/public`;
 
 export function ThankYou() {
   const [scope, animate] = useAnimate();
@@ -79,7 +77,7 @@ export function ThankYou() {
     >
       <img
         className="absolute md:-top-[10rem] object-cover object-top h-full md:h-auto md:w-full opacity-0"
-        src={`${baseFolder}/VHU06801.jpg`}
+        src={imageFromSupabase("VHU06801.jpg")}
         alt="..."
       />
       <h1 className={`${scriptFont.className} text-[5rem] z-10 text-[#EDEDED]`}>

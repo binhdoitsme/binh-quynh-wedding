@@ -1,14 +1,12 @@
 "use client";
 
 import { UnderlinedHeading } from "@/components/heading/underlined-heading";
+import { imageFromSupabase } from "@/components/storage";
 import { useInView, useScreenSize } from "@/hooks/views";
-import { Card, ScrollShadow } from "@nextui-org/react";
+import { Card } from "@nextui-org/react";
 import { stagger, useAnimate } from "framer-motion";
 import Image from "next/image";
 import { useCallback, useEffect, useMemo } from "react";
-
-const baseUrl = process.env["NEXT_PUBLIC_SUPABASE_PUBLIC_URL"] ?? "";
-const baseFolder = `https://${baseUrl}/storage/v1/object/public/wedding-images/public`;
 
 const imagesDesktop = [
   "VHU06530.jpg",
@@ -22,7 +20,7 @@ const imagesDesktop = [
   "VHU07151.jpg",
   "VHU06960.jpg",
   "VHU07085.jpg",
-].map((src) => `${baseFolder}/${src}`);
+].map(imageFromSupabase);
 
 const imagesMobile = [
   "VHU06530.jpg",
@@ -37,7 +35,7 @@ const imagesMobile = [
 
   "VHU06789.jpg",
   "VHU07085.jpg",
-].map((src) => `${baseFolder}/${src}`);
+].map(imageFromSupabase);
 
 export function Gallery() {
   const { isInView, ref } = useInView<HTMLDivElement>(0.25);
@@ -77,11 +75,11 @@ export function Gallery() {
   return (
     <div
       ref={ref}
-      className="w-full h-full border-y border-collapse flex flex-col items-center text-yellow-400 pt-4 pb-6 lg:pb-4"
+      className="w-full h-auto md:h-full border-y border-collapse flex flex-col items-center text-yellow-400 pt-4 pb-6 lg:pb-4"
     >
       <UnderlinedHeading text="Ảnh cưới" />
       {/* masonry layout */}
-      <ScrollShadow>
+      {/* <ScrollShadow> */}
         <div className="py-4 px-4 lg:px-16 lg:my-6">
           <div
             ref={scope}
@@ -111,7 +109,7 @@ export function Gallery() {
             ))}
           </div>
         </div>
-      </ScrollShadow>
+      {/* </ScrollShadow> */}
     </div>
   );
 }
