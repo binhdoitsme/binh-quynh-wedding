@@ -2,8 +2,7 @@
 import { UnderlinedHeading } from "@/components/heading/underlined-heading";
 import { useInView } from "@/hooks/views";
 import { Icon } from "@iconify/react/dist/iconify.js";
-import { Button, ScrollShadow } from "@nextui-org/react";
-import { AnimatePresence } from "framer-motion";
+import { Button } from "@nextui-org/react";
 import { HeartsIcon, PartyChampagneIcon, WeddingRingsIcon } from "./icons";
 import Timeline, { TimelineItem } from "./timeline";
 
@@ -49,17 +48,15 @@ export function InvitationContent() {
     },
   ];
 
-  const { isInView, ref } = useInView(0.2);
+  const { isInView, ref } = useInView<HTMLDivElement>(0.2);
 
   return (
-    <ScrollShadow
+    <div
       ref={ref}
-      className="w-full h-full flex flex-col items-center py-4"
+      className="w-full h-auto min-h-screen flex flex-col items-center py-4 transition-height"
     >
       <UnderlinedHeading text="Trân trọng kính mời" />
-      <AnimatePresence mode="wait">
-        {isInView && <Timeline items={timelineData} />}
-      </AnimatePresence>
-    </ScrollShadow>
+      <Timeline items={timelineData} isInView={isInView} />
+    </div>
   );
 }

@@ -31,6 +31,7 @@ export default function GalleryPage() {
         sectionKey="invitation-content"
         tooltipText="Thiệp mời"
         {...commonProps}
+        className="w-full h-auto"
       >
         <InvitationContent />
       </Section>
@@ -61,6 +62,7 @@ export default function GalleryPage() {
         sectionKey="rsvp"
         tooltipText="Xác nhận tham dự"
         {...commonProps}
+        className="w-full h-auto"
       >
         <RSVP />
       </Section>

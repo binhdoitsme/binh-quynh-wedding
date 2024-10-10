@@ -1,7 +1,7 @@
 // components/Timeline.tsx
 import { Icon } from "@iconify/react";
-import { motion } from "framer-motion";
-import React from "react";
+import { motion, stagger, useAnimate } from "framer-motion";
+import React, { useEffect } from "react";
 
 export type TimelineItem = {
   title: string;
@@ -16,155 +16,148 @@ export type TimelineItem = {
 
 export type TimelineProps = {
   items: TimelineItem[];
+  isInView: boolean;
 };
 
-const Timeline: React.FC<TimelineProps> = ({ items }) => {
-  const textSlideFromLeft = {
-    initial: { opacity: 0, transform: "translateX(-10px)" },
-    animate: { opacity: 1, transform: "translateX(0)" },
-    exit: { opacity: 0, transform: "translateX(-10px)" },
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut",
-      delay: 0.25,
-    },
+const Timeline: React.FC<TimelineProps> = ({ items, isInView }) => {
+  const [scope, animate] = useAnimate();
+
+  const enter = async () => {
+    await Promise.all([
+      animate(
+        ".__text_slide__",
+        { opacity: 1, transform: "translateX(0)" },
+        { duration: 0.5, ease: "easeInOut", delay: stagger(0.25) }
+      ),
+      animate(
+        ".__simple_fade__",
+        { opacity: 1 },
+        { duration: 0.5, ease: "easeInOut", delay: stagger(0.25) }
+      ),
+      animate(
+        ".__circle_path__",
+        { pathLength: 1 },
+        { duration: 1.5, ease: "easeInOut", delay: stagger(0.75) }
+      ),
+      animate(
+        ".__line_path__",
+        { pathLength: 1 },
+        { duration: 1.5, ease: "easeInOut", delay: stagger(0.75) }
+      ),
+      animate(
+        ".__circle_scale__",
+        { scale: [0, 1] },
+        { duration: 1, ease: "circInOut", delay: stagger(1) }
+      ),
+    ]);
+  };
+  const exit = async () => {
+    await Promise.all([
+      animate(
+        ".__text_slide__",
+        { opacity: 0, transform: "translateX(-10px)" },
+        { duration: 0.5, ease: "easeInOut" }
+      ),
+      animate(
+        ".__simple_fade__",
+        { opacity: 0 },
+        { duration: 0.5, ease: "easeInOut" }
+      ),
+      animate(
+        ".__circle_path__",
+        { pathLength: 0 },
+        { duration: 0.5, ease: "easeInOut" }
+      ),
+      animate(
+        ".__line_path__",
+        { pathLength: 0 },
+        { duration: 0.5, ease: "easeInOut" }
+      ),
+      animate(
+        ".__circle_scale__",
+        { scale: 0 },
+        { duration: 1.5, ease: "circInOut" }
+      ),
+    ]);
   };
 
-  const simpleFade = {
-    initial: { opacity: 0 },
-    animate: { opacity: 1 },
-    exit: { opacity: 0 },
-    transition: {
-      duration: 0.5,
-      ease: "easeInOut",
-      delay: 0.3,
-    },
-  };
-
-  const containerVariants = {
-    initial: {},
-    animate: {
-      transition: {
-        staggerChildren: 0.75, // Delay between each child animation
-      },
-    },
-  };
-
-  const itemVariants = {
-    initial: { opacity: 0, transform: "translateX(-10px)" },
-    animate: { opacity: 1, transform: "translateX(0)" },
-    exit: { opacity: 0, transform: "translateX(-10px)" },
-  };
+  useEffect(() => {
+    if (isInView) {
+      enter();
+    } else {
+      exit();
+    }
+  }, [isInView]);
 
   return (
-    <motion.ol
+    <ol
+      ref={scope}
       className="w-5/6 md:w-2/3 m-6 mb-2 text-medium md:text-base leading-5 md:leading-none"
-      variants={containerVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
     >
       {items.map((item, index) => (
-        <motion.li
-          key={index}
-          className="flex flex-row -ms-6 md:ms-0"
-          variants={itemVariants}
-        >
-          <motion.div className="w-20 md:w-auto">
-            <motion.svg viewBox="0 0 500 1000" className="w-24">
-              <motion.line
-                className="stroke-red-200"
+        <li key={index} className="flex flex-row -ms-6 md:ms-0">
+          <div className="w-20 md:w-auto">
+            <svg viewBox="0 0 500 1000" className="w-24">
+              <line
+                className="stroke-red-200 __line_path__"
                 x1="250"
                 y1="275"
                 x2="250"
                 y2="1050"
                 strokeDasharray="0 1"
                 strokeWidth="4"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                exit={{ pathLength: 0 }}
-                transition={{
-                  duration: 1,
-                  ease: "easeInOut",
-                  delay: 0.25,
-                }}
               />
-              <motion.circle
-                className="stroke-red-700"
+              <circle
+                className="stroke-red-700 __circle_path__"
                 r="125"
                 cx="250"
                 cy="150"
                 fill="transparent"
                 strokeWidth="8"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                exit={{ pathLength: 0 }}
-                transition={{
-                  duration: 1,
-                  ease: "easeInOut",
-                }}
                 strokeDasharray="0 1"
               />
               <motion.circle
-                className="stroke-red-700 hover:ring-4"
+                className="stroke-red-700 hover:ring-4 __circle_scale__"
                 r="125"
                 cx="250"
                 cy="150"
                 fill="#b91c1c"
                 strokeWidth="1"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0 }}
-                transition={{
-                  duration: 1,
-                  ease: "circInOut",
-                }}
                 strokeDasharray="0 1"
+                style={{ transformOrigin: "center" }}
               />
               {item.icon}
-            </motion.svg>
-          </motion.div>
-          <motion.div className="ms-4 py-4 grid grid-cols-12 gap-2">
-            <motion.h2
-              className="text-xl font-bold col-span-12"
-              {...textSlideFromLeft}
-            >
+            </svg>
+          </div>
+          <div className="ms-4 py-4 grid grid-cols-12 gap-2">
+            <h2 className="text-xl font-bold col-span-12 __text_slide__">
               {item.title}
-            </motion.h2>
+            </h2>
             {/* Date */}
-            <motion.div className="col-span-2 md:col-span-1" {...simpleFade}>
+            <div className="col-span-2 md:col-span-1 __simple_fade__">
               <Icon icon="ion:calendar-outline" />
-            </motion.div>
-            <motion.div
-              className="col-span-10 md:col-span-11 md:-mx-6"
-              {...textSlideFromLeft}
-            >
+            </div>
+            <div className="col-span-10 md:col-span-11 md:-mx-6 __text_slide__">
               <p className="font-normal text-gray-600">{item.date}</p>
-            </motion.div>
+            </div>
             {/* Time */}
-            <motion.div className="col-span-2 md:col-span-1" {...simpleFade}>
+            <div className="col-span-2 md:col-span-1 __simple_fade__">
               <Icon icon="ion:time-outline" />
-            </motion.div>
-            <motion.div
-              className="col-span-10 md:col-span-11 md:-mx-6"
-              {...textSlideFromLeft}
-            >
+            </div>
+            <div className="col-span-10 md:col-span-11 md:-mx-6 __text_slide__">
               <p className="font-normal text-gray-600">{item.time}</p>
-            </motion.div>
+            </div>
 
             {/* Location */}
-            <motion.div className="col-span-2 md:col-span-1" {...simpleFade}>
+            <div className="col-span-2 md:col-span-1 __simple_fade__">
               <Icon icon="ph:map-pin" />
-            </motion.div>
-            <motion.div
-              className="col-span-10 md:col-span-11 md:-mx-6"
-              {...textSlideFromLeft}
-            >
+            </div>
+            <div className="col-span-10 md:col-span-11 md:-mx-6 __text_slide__">
               <p className="font-normal text-gray-600">{item.location}</p>
-            </motion.div>
+            </div>
 
             {/* Action Button or Link */}
-            <motion.div {...simpleFade}>
+            <div className="__simple_fade__">
               {item.action && (
                 <div className="mt-2">
                   {typeof item.action === "function"
@@ -172,11 +165,11 @@ const Timeline: React.FC<TimelineProps> = ({ items }) => {
                     : item.action}
                 </div>
               )}
-            </motion.div>
-          </motion.div>
-        </motion.li>
+            </div>
+          </div>
+        </li>
       ))}
-    </motion.ol>
+    </ol>
   );
 };
 
