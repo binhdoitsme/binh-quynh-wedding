@@ -8,6 +8,7 @@ import { InvitationContent } from "../sections/invitation-content";
 import { InvitationCover } from "../sections/invitation-cover";
 import { RSVP } from "../sections/rsvp";
 import { SendGifts } from "../sections/send-gifts";
+import { Story } from "../sections/story";
 import { ThankYou } from "../sections/thank-you";
 
 export default function GalleryPage() {
@@ -40,10 +41,20 @@ export default function GalleryPage() {
       >
         <BrideAndGroom />
       </Section>
-      {/* <Section sectionKey="story" tooltipText="Câu chuyện" {...commonProps}>
+      <Section
+        sectionKey="story"
+        tooltipText="Câu chuyện"
+        {...commonProps}
+        // className="w-full h-full"
+      >
         <Story />
-      </Section> */}
-      <Section sectionKey="gallery" tooltipText="Ảnh cưới" {...commonProps}>
+      </Section>
+      <Section
+        sectionKey="gallery"
+        tooltipText="Ảnh cưới"
+        {...commonProps}
+        className="w-full h-auto"
+      >
         <Gallery />
       </Section>
       <Section

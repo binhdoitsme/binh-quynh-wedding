@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 export function WeddingRingsIcon({ className }: { className?: string }) {
   return (
     <motion.svg
-      fill="#000000"
+      fill="#ffffff"
       height="400px"
       width="400px"
       version="1.1"
