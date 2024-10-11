@@ -91,7 +91,7 @@ export function SendGifts() {
                   <Image
                     src={qrBinhVTMoney}
                     alt="Groom's QR code"
-                    className="h-full object-cover"
+                    className="h-[calc(100%-3rem)] object-cover"
                   />
                   <Button
                     href={qrBinhVTMoney.src}
