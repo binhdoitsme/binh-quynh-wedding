@@ -60,7 +60,9 @@ export function RSVP() {
       try {
         setLoading(true);
         await submitForm(data, abortController);
+        formRef.current.reset();
         setError(undefined);
+        setWillParticipate(false);
         // eslint-disable-next-line
       } catch (err: any) {
         setError(`${err.response.data.detail}`);
@@ -184,6 +186,7 @@ export function RSVP() {
                         className="mr-4 text-[#FAFAFA]"
                         value={value}
                         name="events"
+                        form="registration"
                       >
                         {name} ({date})
                       </Checkbox>
