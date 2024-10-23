@@ -134,7 +134,7 @@ export function Story() {
               </div>
               <Divider
                 orientation="vertical"
-                className="invert mx-4 __divider__"
+                className="bg-white mx-4 __divider__"
               />
               <div className="w-[calc(50%-2px)] h-full grid grid-rows-4 grid-cols-1 gap-2">
                 <div className="__right__">
