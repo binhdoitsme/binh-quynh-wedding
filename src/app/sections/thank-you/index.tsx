@@ -70,7 +70,7 @@ export function ThankYou() {
       className="w-full h-full overflow-hidden absolute top-0 left-0 border-y border-collapse flex flex-col justify-center items-center py-4 bg-[#fffdf9]"
     >
       <img
-        className="absolute md:-top-[10rem] object-cover object-top w-full md:h-auto md:w-full opacity-0"
+        className="absolute md:-top-[10rem] object-cover object-top h-full md:h-auto md:w-full opacity-0"
         src={imageFromSupabase("VHU06801(1).jpg")}
         alt="..."
       />
