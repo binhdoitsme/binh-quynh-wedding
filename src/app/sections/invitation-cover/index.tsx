@@ -1,19 +1,10 @@
 "use client";
+import { montserrat, scriptFont } from "@/app/fonts/global-fonts";
 import { OutlinedButton } from "@/components/buttons";
 import { useScreenSize } from "@/hooks/views";
 import { AnimatePresence, motion } from "framer-motion";
-import { Imperial_Script, Montserrat } from "next/font/google";
 import { useMemo } from "react";
 
-const scriptFont = Imperial_Script({
-  weight: "400",
-  subsets: ["vietnamese"],
-});
-
-const montserrat = Montserrat({
-  weight: "400",
-  subsets: ["vietnamese"],
-});
 
 export type InvitationCoverProps = {
   handleViewInvitationContent?: () => void;

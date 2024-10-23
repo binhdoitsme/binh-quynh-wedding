@@ -1,12 +1,7 @@
-import { Imperial_Script } from "next/font/google";
-import { HeadingProps } from "./props";
-import { Divider } from "@nextui-org/react";
+import { scriptFont } from "@/app/fonts/global-fonts";
 import { useScreenSize } from "@/hooks/views";
-
-const scriptFont = Imperial_Script({
-  weight: "400",
-  subsets: ["vietnamese"],
-});
+import { Divider } from "@nextui-org/react";
+import { HeadingProps } from "./props";
 
 export function UnderlinedHeading(props: HeadingProps) {
   const screenSize = useScreenSize();

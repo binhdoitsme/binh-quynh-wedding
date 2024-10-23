@@ -1,19 +1,14 @@
 "use client";
 
+import { montserrat } from "@/app/fonts/global-fonts";
 import { UnderlinedHeading } from "@/components/heading/underlined-heading";
 import { imageFromSupabase } from "@/components/storage";
 import { useInView } from "@/hooks/views";
 import { Divider } from "@nextui-org/react";
 import { stagger, useAnimate } from "framer-motion";
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { CSSProperties, useEffect } from "react";
 import photowall from "./photowall.jpg";
-
-const montserrat = Montserrat({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["vietnamese"],
-});
 
 export function PolaroidImage({
   imageName,
