@@ -71,7 +71,7 @@ export function ThankYou() {
     >
       <img
         className="absolute md:-top-[10rem] object-cover object-top h-full md:h-auto md:w-full opacity-0"
-        src={imageFromSupabase("VHU06801(1).jpg")}
+        src={imageFromSupabase("VHU06801.jpg")}
         alt="..."
       />
       <h1 className={`${scriptFont.className} text-[5rem] z-10 text-[#EDEDED]`}>
