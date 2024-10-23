@@ -1,19 +1,14 @@
 "use client";
 
+import { montserrat } from "@/app/fonts/global-fonts";
 import { UnderlinedHeading } from "@/components/heading/underlined-heading";
 import { imageFromSupabase } from "@/components/storage";
 import { useInView } from "@/hooks/views";
 import { Divider } from "@nextui-org/react";
 import { stagger, useAnimate } from "framer-motion";
-import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import { CSSProperties, useEffect } from "react";
 import photowall from "./photowall.jpg";
-
-const montserrat = Montserrat({
-  weight: ["400", "500", "600", "700"],
-  subsets: ["vietnamese"],
-});
 
 export function PolaroidImage({
   imageName,
@@ -139,7 +134,7 @@ export function Story() {
               </div>
               <Divider
                 orientation="vertical"
-                className="invert mx-4 __divider__"
+                className="bg-white mx-4 __divider__"
               />
               <div className="w-[calc(50%-2px)] h-full grid grid-rows-4 grid-cols-1 gap-2">
                 <div className="__right__">
@@ -155,7 +150,7 @@ export function Story() {
                   </p>
                 </div>
                 <div className="flex flex-row justify-start mt-1 __right__">
-                  <PolaroidImage imageName="2020_03.JPG" />
+                  <PolaroidImage imageName="2020_03.jpg" />
                 </div>
                 <div className="__right__">
                   <h1

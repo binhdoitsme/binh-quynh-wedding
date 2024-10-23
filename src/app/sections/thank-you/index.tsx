@@ -1,13 +1,7 @@
+import { scriptFont } from "@/app/fonts/global-fonts";
 import { imageFromSupabase } from "@/components/storage";
 import { useAnimate, useInView } from "framer-motion";
-import { Imperial_Script } from "next/font/google";
 import { useCallback, useEffect } from "react";
-
-const scriptFont = Imperial_Script({
-  weight: "400",
-  subsets: ["vietnamese"],
-  display: "swap",
-});
 
 export function ThankYou() {
   const [scope, animate] = useAnimate();

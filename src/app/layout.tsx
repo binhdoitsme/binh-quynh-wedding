@@ -11,6 +11,7 @@ export const metadata: Metadata = {
 const font = IBM_Plex_Sans({
   weight: ["400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
 });
 
 export default function RootLayout({

@@ -1,19 +1,9 @@
+import { montserrat, scriptFont } from "@/app/fonts/global-fonts";
 import { UnderlinedHeading } from "@/components/heading/underlined-heading";
 import { imageFromSupabase } from "@/components/storage";
 import { useInView } from "@/hooks/views";
 import { AnimatePresence, motion } from "framer-motion";
-import { Imperial_Script, Montserrat } from "next/font/google";
 import Image from "next/image";
-
-const scriptFont = Imperial_Script({
-  weight: "400",
-  subsets: ["vietnamese"],
-});
-
-const montserrat = Montserrat({
-  weight: "400",
-  subsets: ["vietnamese"],
-});
 
 const bridePhotoName = "VHU06638.jpg";
 const groomPhotoName = "VHU06613.jpg";
@@ -24,7 +14,7 @@ export function BrideAndGroom() {
   return (
     <div
       ref={ref}
-      className="w-full h-full border-y border-collapse bg-[#fafafa]"
+      className="w-full h-auto py-8 border-y border-collapse bg-[#fafafa]"
     >
       <div className="w-full flex flex-col items-center pt-4">
         <UnderlinedHeading text="Cô dâu & Chú rể" />

@@ -1,4 +1,4 @@
-import { createClient } from "@supabase/supabase-js";
+import { sql } from "@vercel/postgres";
 
 interface TransportAssist {
   preferredPickupLocation: string;
@@ -37,48 +37,34 @@ function validated(body: any): ParticipationRequest | undefined {
   };
 }
 
-export async function GET() {
-  const supabase = createClient(
-    process.env["SUPABASE_URL"] ?? "",
-    process.env["SUPABASE_KEY"] ?? ""
-  );
-  const { data: files } = await supabase.storage
-    .from("wedding-images")
-    .list("public");
-  const {
-    data: { publicUrl: baseUrl },
-  } = supabase.storage.from("wedding-images").getPublicUrl("public");
-
-  return Response.json(files?.map(({ name }) => `${baseUrl}/${name}`) ?? []);
-}
-
 export async function POST(request: Request) {
   const body = await request.json().then(validated);
   if (!body) {
     return Response.json({}, { status: 400 });
   }
   console.log(body);
-  const supabase = createClient(
-    process.env["SUPABASE_URL"] ?? "",
-    process.env["SUPABASE_KEY"] ?? ""
-  );
-  const insertResult = await supabase.from("wedding_participations").upsert(
-    {
-      phone_number: body.phoneNumber,
-      email: body.email,
-      name: body.name,
-      joining_bride_party: "bride-party" in (body.participation ?? {}),
-      joining_bride_ceremony: "bride-ceremony" in (body.participation ?? {}),
-      joining_wedding_ceremony:
-        "wedding-ceremony" in (body.participation ?? {}),
-    },
-    { onConflict: "phone_number, email" }
-  );
-
-  const error = insertResult.error;
-  if (error === null) {
+  try {
+    const result = await sql`
+    INSERT INTO wedding_participations 
+      (phone_number, email, name, joining_bride_party, joining_bride_ceremony, joining_wedding_ceremony)
+    VALUES 
+      (${body.phoneNumber}, ${body.email}, ${body.name}, 
+      ${"bride-party" in (body.participation ?? {})}, 
+      ${"bride-ceremony" in (body.participation ?? {})}, 
+      ${"wedding-ceremony" in (body.participation ?? {})})
+    ON CONFLICT (phone_number, email)
+    DO UPDATE SET 
+      name = EXCLUDED.name,
+      joining_bride_party = EXCLUDED.joining_bride_party,
+      joining_bride_ceremony = EXCLUDED.joining_bride_ceremony,
+      joining_wedding_ceremony = EXCLUDED.joining_wedding_ceremony;
+  `;
+    console.log(`Rows updated: ${result.rowCount}`);
+    if (result.rowCount === null) {
+      throw Error("Cannot execute query on DB");
+    }
     return Response.json({ msg: "ok" }, { status: 200 });
-  } else {
+  } catch (error) {
     console.error(error);
     return Response.json(
       { detail: "Vui lòng điền lại mẫu xác nhận tham dự sau!" },
