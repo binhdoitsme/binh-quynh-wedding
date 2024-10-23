@@ -9,15 +9,10 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import { Imperial_Script } from "next/font/google";
 import Image from "next/image";
 import qrBinhVTMoney from "./qr-binh-vtmoney.jpeg";
 import qrQuynhTech from "./qr-quynh-tech.jpeg";
-
-const scriptFont = Imperial_Script({
-  weight: "400",
-  subsets: ["vietnamese"],
-});
+import { scriptFont } from "@/app/fonts/global-fonts";
 
 function GiftIcon() {
   return (

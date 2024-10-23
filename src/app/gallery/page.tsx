@@ -39,6 +39,7 @@ export default function GalleryPage() {
         sectionKey="bride-groom"
         tooltipText="Cô dâu & Chú rể"
         {...commonProps}
+        className="w-full h-auto"
       >
         <BrideAndGroom />
       </Section>

@@ -1,13 +1,7 @@
+import { scriptFont } from "@/app/fonts/global-fonts";
 import { imageFromSupabase } from "@/components/storage";
 import { useAnimate, useInView } from "framer-motion";
-import { Imperial_Script } from "next/font/google";
 import { useCallback, useEffect } from "react";
-
-const scriptFont = Imperial_Script({
-  weight: "400",
-  subsets: ["vietnamese"],
-  display: "swap",
-});
 
 export function ThankYou() {
   const [scope, animate] = useAnimate();
@@ -76,8 +70,8 @@ export function ThankYou() {
       className="w-full h-full overflow-hidden absolute top-0 left-0 border-y border-collapse flex flex-col justify-center items-center py-4 bg-[#fffdf9]"
     >
       <img
-        className="absolute md:-top-[10rem] object-cover object-top h-full md:h-auto md:w-full opacity-0"
-        src={imageFromSupabase("VHU06801.jpg")}
+        className="absolute md:-top-[10rem] object-cover object-top w-full md:h-auto md:w-full opacity-0"
+        src={imageFromSupabase("VHU06801(1).jpg")}
         alt="..."
       />
       <h1 className={`${scriptFont.className} text-[5rem] z-10 text-[#EDEDED]`}>
