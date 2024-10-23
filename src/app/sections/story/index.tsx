@@ -150,7 +150,7 @@ export function Story() {
                   </p>
                 </div>
                 <div className="flex flex-row justify-start mt-1 __right__">
-                  <PolaroidImage imageName="2020_03.JPG" />
+                  <PolaroidImage imageName="2020_03.jpg" />
                 </div>
                 <div className="__right__">
                   <h1
